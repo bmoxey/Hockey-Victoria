@@ -7,6 +7,8 @@
 
 import Foundation
 
+var url = "https://www.hockeytasmania.com.au/"
+
 struct Game: Codable, Identifiable {
     var id: UUID
     var roundNo: String

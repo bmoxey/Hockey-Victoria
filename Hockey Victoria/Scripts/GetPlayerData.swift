@@ -14,7 +14,7 @@ func GetPlayerData(allTeams: [Teams], ourCompID: String, ourTeam: String, ourTea
     var playersStats: [PlayerStat] = []
     (lines, errMsg) = GetUrl(url: myURL.replacingOccurrences(of: "&amp;", with: "&"))
     for i in 0 ..< lines.count {
-        if lines[i].contains("https://www.hockeyvictoria.org.au/statistics/") {
+        if lines[i].contains("\(url)statistics/") {
             var count = 6
             while lines[i+count].contains("option value") {
                 let testCompID = String(lines[i+count].split(separator: "\"")[1])
@@ -27,7 +27,7 @@ func GetPlayerData(allTeams: [Teams], ourCompID: String, ourTeam: String, ourTea
         }
     }
     for i in 0 ..< lines.count {
-        if lines[i].contains("https://www.hockeyvictoria.org.au/teams") {
+        if lines[i].contains("\(url)teams") {
             if lines[i-17].contains("Attended") || lines[i-17].contains("Filled in") {
                 var fillin: Bool
                 if lines[i-17].contains("Filled in") { fillin = true } else { fillin = false }

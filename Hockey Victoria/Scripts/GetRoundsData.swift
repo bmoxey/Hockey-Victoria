@@ -13,10 +13,10 @@ func GetRoundsData(mycomp: Teams) async -> ([RoundNum], String) {
     var started: Bool = false
     var roundNames: [RoundNum] = []
     var count = 0
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/games/" + mycomp.compID + "/&d=" + mycomp.divID)
+    (lines, errMsg) = GetUrl(url: "\(url)games/" + mycomp.compID + "/&d=" + mycomp.divID)
     for i in 0 ..< lines.count {
-        if lines[i].contains("https://www.hockeyvictoria.org.au/pointscores/") { started = true }
-        if lines[i].contains("https://www.hockeyvictoria.org.au/games/") {
+        if lines[i].contains("\(url)pointscores/") { started = true }
+        if lines[i].contains("\(url)games/") {
             if started {
                 let mybit = String(lines[i]).split(separator: "\"")
                 let myURL = String(mybit[1]).replacingOccurrences(of: "&amp;", with: "&")

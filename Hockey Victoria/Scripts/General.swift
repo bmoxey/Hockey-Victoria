@@ -127,7 +127,9 @@ func FixName(fullname: String) -> (String, String, Bool) {
         }
         let name = surname
         let surname = name.count >= 3 && name.lowercased().hasPrefix("mc") ? String(name.prefix(2)) + name[name.index(name.startIndex, offsetBy: 2)].uppercased() + String(name.suffix(from: name.index(after: name.index(name.startIndex, offsetBy: 2)))) : name
-        myName = mybits[1].trimmingCharacters(in: .whitespaces).capitalized + " " + surname
+        if mybits.count > 1 {
+            myName = mybits[1].trimmingCharacters(in: .whitespaces).capitalized + " " + surname
+        }
     }
     return(myName, surname, myCap)
 }

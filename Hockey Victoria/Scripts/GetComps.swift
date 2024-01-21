@@ -15,7 +15,7 @@ func getComps() async -> ([Competitions], String) {
     var selected = false
     var errMsg = ""
     var lines: [String] = []
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/games/")
+    (lines, errMsg) = GetUrl(url: "\(url)games/")
     for i in 0 ..< lines.count {
         if lines[i].contains("/reports/games/download/") {
             if !myComp.isEmpty {

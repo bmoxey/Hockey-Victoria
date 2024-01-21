@@ -23,11 +23,11 @@ func GetRoundData(myURL: String, myTeam: Teams) async -> ([Game], [String], Stri
                 let dateTime = lines[i+1].trimmingCharacters(in: .whitespacesAndNewlines) + " " + lines[i+3].trimmingCharacters(in: .whitespacesAndNewlines)
                 (myGame.message, myGame.date) = GetStart(inputDate: dateTime)
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/venues/") {
+            if lines[i].contains("\(url)venues/") {
                 myGame.venue = lines[i+1]
                 myGame.field = lines[i+5]
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/teams/") {
+            if lines[i].contains("\(url)teams/") {
                 if byes {
                     byeTeams.append(ShortTeamName(fullName: lines[i+1]))
                 } else {
@@ -63,7 +63,7 @@ func GetRoundData(myURL: String, myTeam: Teams) async -> ([Game], [String], Stri
                     }
                 }
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/game/") {
+            if lines[i].contains("\(url)game/") {
                 myGame.gameID = String(lines[i].split(separator: "/")[3])
                 myGame.id = UUID()
                 games.append(myGame)

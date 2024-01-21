@@ -15,12 +15,18 @@ func ShortTeamName(fullName: String) -> String {
         .replacingOccurrences(of: " Section", with: "")
         .replacingOccurrences(of: " United", with: " Utd")
         .replacingOccurrences(of: "Hockey ", with: "")
-        .replacingOccurrences(of: "University", with: "Uni")
+        .replacingOccurrences(of: " University", with: " Uni")
         .replacingOccurrences(of: "Eastern Christian Organisation (ECHO)", with: "ECHO")
         .replacingOccurrences(of: "Melbourne High School Old Boys", with: "MHSOB")
         .replacingOccurrences(of: "Greater ", with: "")
         .replacingOccurrences(of: "St Bede's", with: "St. Bede's")
         .replacingOccurrences(of: "Khalsas", with: "Khalsa")
+        .replacingOccurrences(of: " MM1", with: "")
+        .replacingOccurrences(of: " MM2", with: "")
+        .replacingOccurrences(of: " MW1", with: "")
+        .replacingOccurrences(of: " MW2", with: "")
+        .replacingOccurrences(of: " MW3", with: "")
+        .replacingOccurrences(of: " GH", with: "")
     return newString
 }
 

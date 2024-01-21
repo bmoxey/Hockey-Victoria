@@ -12,13 +12,13 @@ func GetStatsData(myCompID: String, myTeamID: String) -> ( [Player], String) {
     var errMsg = ""
     var fillins = false
     var players: [Player] = []
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/teams-stats/" + myCompID + "/&t=" + myTeamID)
+    (lines, errMsg) = GetUrl(url: "\(url)teams-stats/" + myCompID + "/&t=" + myTeamID)
     for i in 0 ..< lines.count {
          if lines[i].contains("There are no records to show.") {
              errMsg = "There are no records to show."
          }
          if lines[i].contains("Fill ins") { fillins = true }
-         if lines[i].contains("https://www.hockeyvictoria.org.au/statistics/") {
+         if lines[i].contains("\(url)statistics/") {
              let statsLink = String(lines[i].split(separator: "\"")[1])
              var myName = ""
              var surname = ""

@@ -13,7 +13,7 @@ func GetLadderData(myCompID: String, myDivID: String, myTeam: String) -> ([Ladde
     var lines: [String] = []
     var errMsg = ""
     var pos = 0
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/pointscores/" + myCompID + "/&d=" + myDivID)
+    (lines, errMsg) = GetUrl(url: "\(url)pointscores/" + myCompID + "/&d=" + myDivID)
     for i in 0 ..< lines.count {
         if lines[i].contains("This ladder is not currently available") {
             errMsg = "This ladder is not currently available"

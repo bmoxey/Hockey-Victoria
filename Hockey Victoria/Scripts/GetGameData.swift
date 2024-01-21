@@ -22,7 +22,7 @@ func GetGameData(gameID: String, myTeam: String) async -> (Game, [Player], [Play
     var FF: Bool = false
     var FL: Bool = false
     var msg: String = ""
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/game/" + gameID + "/")
+    (lines, errMsg) = GetUrl(url: "\(url)game/" + gameID + "/")
     for i in 0 ..< lines.count {
         if lines[i].contains("Match not found.") {
             errMsg = "Match not found."
@@ -91,7 +91,7 @@ func GetGameData(gameID: String, myTeam: String) async -> (Game, [Player], [Play
             if lines[i].contains("table-responsive") {
                 currentTeamName = ShortTeamName(fullName: lines[i-5])
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/statistics/") {
+            if lines[i].contains("\(url)statistics/") {
                 if lines[i-3].contains("Attended") || fillins {
                     let statsLink = String(lines[i].split(separator: "\"")[1])
                     var myName = ""
@@ -121,7 +121,7 @@ func GetGameData(gameID: String, myTeam: String) async -> (Game, [Player], [Play
                 let dateTime = lines[i+7].trimmingCharacters(in: .whitespacesAndNewlines) + " " + lines[i+9].trimmingCharacters(in: .whitespacesAndNewlines)
                 (myGame.message, myGame.date) = GetStart(inputDate: dateTime)
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/venues") {
+            if lines[i].contains("\(url)venues") {
                 myGame.venue = lines[i+1]
                 myGame.field = lines[i+5]
             }
@@ -132,14 +132,14 @@ func GetGameData(gameID: String, myTeam: String) async -> (Game, [Player], [Play
             if lines[i] == "vs" {
                 myGame.result = "No Result"
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/teams") {
+            if lines[i].contains("\(url)teams") {
                 if myGame.homeTeam == "" {
                     myGame.homeTeam = ShortTeamName(fullName: lines[i+1])
                 } else {
                     myGame.awayTeam = ShortTeamName(fullName: lines[i+1])
                 }
             }
-            if lines[i].contains("https://www.hockeyvictoria.org.au/game/") {
+            if lines[i].contains("\(url)game/") {
                 if myGame.homeTeam == myTeam { myGame.opponent = myGame.awayTeam }
                 else {myGame.opponent = myGame.homeTeam}
                 if myGame.result != "No Result" {

@@ -17,7 +17,7 @@ func GetFixtureData(mycompID: String, myTeamID: String, myTeamName: String) asyn
     var score = ""
     var currentRound = "Round 1"
     var lastDate = Date()
-    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/teams/" + mycompID + "/&t=" + myTeamID)
+    (lines, errMsg) = GetUrl(url: "\(url)teams/" + mycompID + "/&t=" + myTeamID)
     for i in 0 ..< lines.count {
         if lines[i].contains("There are no draws to show") {
             errMsg = "There are no draws to show"
@@ -27,7 +27,7 @@ func GetFixtureData(mycompID: String, myTeamID: String, myTeamName: String) asyn
             let dateTime = lines[i+6].trimmingCharacters(in: .whitespacesAndNewlines) + " " + lines[i+8].trimmingCharacters(in: .whitespacesAndNewlines)
             (myGame.message, myGame.date) = GetStart(inputDate: dateTime)
         }
-        if lines[i].contains("https://www.hockeyvictoria.org.au/venues") {
+        if lines[i].contains("\(url)venues") {
             myGame.venue = lines[i+1]
             myGame.field = lines[i+5]
         }
@@ -35,7 +35,7 @@ func GetFixtureData(mycompID: String, myTeamID: String, myTeamName: String) asyn
             myGame.result = "BYE"
             myGame.opponent = "Nobody"
         }
-        if lines[i].contains("https://www.hockeyvictoria.org.au/teams/") {
+        if lines[i].contains("\(url)teams/") {
             myGame.opponent = ShortTeamName(fullName: lines[i+1])
             score = lines[i+4]
             myGame.result = lines[i+8]
@@ -48,7 +48,7 @@ func GetFixtureData(mycompID: String, myTeamID: String, myTeamName: String) asyn
         }
         if lines[i].contains("badge badge-danger") && lines[i+1] == "FF" {FF = true}
         if lines[i].contains("badge badge-warning") && lines[i+1] == "FL" {FL = true}
-        if lines[i].contains("https://www.hockeyvictoria.org.au/game/") {
+        if lines[i].contains("\(url)game/") {
             if myGame.result != "" {
                 (myGame.homeTeam, myGame.awayTeam) = GetHomeTeam(result: myGame.result, homeGoals: myGame.homeGoals, awayGoals: myGame.awayGoals, myTeam: myTeamName, opponent: myGame.opponent, rounds: rounds, venue: myGame.venue)
                 if FL == true && myGame.result == "Loss" { myGame.result = "-FL" }

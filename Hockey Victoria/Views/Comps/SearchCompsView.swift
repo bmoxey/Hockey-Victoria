@@ -65,10 +65,10 @@ struct SearchCompsView: View {
                 for item in items {
                     searchComp = selectedComp.name
                     searchDiv = item.name
-                    (lines, errMsg) = GetUrl(url: "https://www.hockeyvictoria.org.au/games/\(selectedComp.nameID)/&r=\(selectedWeek)&d=\(item.nameID)")
+                    (lines, errMsg) = GetUrl(url: "\(url)games/\(selectedComp.nameID)/&r=\(selectedWeek)&d=\(item.nameID)")
                     divsFound += 1
                     for i in 0 ..< lines.count {
-                        if lines[i].contains("https://www.hockeyvictoria.org.au/teams") {
+                        if lines[i].contains("\(url)teams") {
                             teamsFound += 1
                             let teamName = ShortTeamName(fullName: lines[i+1])
                             let teamID = String(String(lines[i].split(separator: "=")[2]).trimmingCharacters(in: .punctuationCharacters))
