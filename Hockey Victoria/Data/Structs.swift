@@ -7,7 +7,9 @@
 
 import Foundation
 
-var url = "https://www.hockeytasmania.com.au/"
+//var url = "https://www.hockeytasmania.com.au/"
+var url = "https://www.hockeyvictoria.org.au/"
+
 
 struct Game: Codable, Identifiable {
     var id: UUID
